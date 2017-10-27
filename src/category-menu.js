@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { getCategories } from './utils/readable-api';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getCategories } from "./actions/categories";
 
 class CategoryMenu extends Component {
-  state = {
-    categories: []
-  }
-
   componentDidMount() {
-    getCategories()
-    .then(categories => this.setState({categories}))
+    this.props.getCategories()
   }
 
   render() {
-    const { categories } = this.state
+    const { categories } = this.props
 
     return(
       <ul>
@@ -27,4 +23,15 @@ class CategoryMenu extends Component {
   }
 }
 
-export default CategoryMenu
+const mapStateToProps = ({categories}) => ({
+  categories
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getCategories: () => dispatch(getCategories())
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoryMenu)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import LandingPage from "./landing-page"
+import LandingPage from "./landing-page";
 
 class App extends Component {
   render() {
