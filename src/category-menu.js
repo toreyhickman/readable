@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCategories } from "./actions/categories";
+import CategoryLink from "./category-link";
+
 
 class CategoryMenu extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class CategoryMenu extends Component {
       <ul>
         {categories.map(category => (
           <li key={category.name}>
-            <Link to={`/category/${category.path}`}>{category.name}</Link>
+            <CategoryLink {...category} />
           </li>
         ))}
       </ul>
@@ -23,6 +24,8 @@ class CategoryMenu extends Component {
   }
 }
 
+
+// Connect to Redux store
 const mapStateToProps = ({categories}) => ({
   categories
 })
