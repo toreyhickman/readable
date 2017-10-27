@@ -33,6 +33,4 @@ const mapStateToProps = ({categories}) => ({
   categories
 })
 
-export default connect(
-  mapStateToProps
-)(CategoryMenu)
+export default connect(mapStateToProps)(CategoryMenu)

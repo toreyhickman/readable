@@ -11,3 +11,5 @@ const get = (path) => (
 )
 
 export const getCategories = () => get("/categories").then(json => json.categories)
+
+export const getPosts = () => get("/posts")
