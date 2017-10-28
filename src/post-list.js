@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import PostOverview from "./post-overview";
 
 class PostList extends Component {
   static PropTypes = {
@@ -46,7 +47,9 @@ class PostList extends Component {
         <ul>
           {
             this.sortedPosts().map(post => (
-              <li key={post.id}>{post.id} score: {post.voteScore}</li>
+              <li key={post.id}>
+                <PostOverview {...post} />
+              </li>
             ))
           }
         </ul>
