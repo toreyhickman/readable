@@ -25,7 +25,7 @@ class PostList extends Component {
   }
 
   sortOptions = [
-    { value: "voteScore", label: "Vote Score" },
+    { value: "voteScore", label: "Highest Score" },
     { value: "timestamp", label: "Most Recent" }
   ]
 
