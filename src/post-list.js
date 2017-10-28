@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import PostOverview from "./post-overview";
+import PostListSortOnPicker from "./post-list-sort-on-picker";
+
 
 class PostList extends Component {
   static PropTypes = {
@@ -21,6 +23,13 @@ class PostList extends Component {
   state = {
     sortOn: "voteScore"
   }
+
+  sortOptions = [
+    { value: "voteScore", label: "Vote Score" },
+    { value: "timestamp", label: "Most Recent" }
+  ]
+
+  setSortOn = (postAttribute) => this.setState({sortOn: postAttribute })
 
   heading = () => "Posts"
 
@@ -44,6 +53,8 @@ class PostList extends Component {
     return (
       <div>
         <h1>{this.heading()}</h1>
+        <span>Sort by: </span>
+        <PostListSortOnPicker options={this.sortOptions} onChange={this.setSortOn} />
         <ul>
           {
             this.sortedPosts().map(post => (
