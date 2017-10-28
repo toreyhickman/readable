@@ -10,6 +10,22 @@ const get = (path) => (
   .then(response => response.json())
 )
 
+const post = (path, body) => (
+  fetch(READABLE_API_HOST + path, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      ...DEFAULT_REQUEST_OPTIONS.headers,
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => response.json())
+)
+
 export const getCategories = () => get("/categories").then(json => json.categories)
 
 export const getPosts = () => get("/posts")
+
+export const upVotePost = (id) => post("/posts/" + id, {option: "upVote"})
+
+export const downVotePost = (id) => post("/posts/" + id, {option: "downVote"})

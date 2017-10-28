@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import PostVoter from "./post-voter";
 
 class PostOverview extends Component {
   static PropTypes = {
@@ -17,7 +18,7 @@ class PostOverview extends Component {
   postDate = () => new Date(this.props.timestamp).toString()
 
   render() {
-    const { title, body, author, voteScore, commentCount } = this.props
+    const { id, title, body, author, voteScore, commentCount } = this.props
 
     return (
       <div>
@@ -26,6 +27,7 @@ class PostOverview extends Component {
         <p>Written by {author} on {this.postDate()}.</p>
         <p>Score: {voteScore}</p>
         <p>Comment count: {commentCount}</p>
+        <PostVoter id={id} />
       </div>
     )
   }
