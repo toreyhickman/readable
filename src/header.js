@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import CategoryMenu from "./category-menu";
+import NewPostLink from "./new-post-link";
 
 
 class Header extends Component {
@@ -9,6 +10,7 @@ class Header extends Component {
       <div>
         <Link to="/">home</Link>
         <CategoryMenu />
+        <NewPostLink />
       </div>
     )
   }
