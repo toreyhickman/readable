@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from "react-redux";
+import { BrowserRouter } from 'react-router-dom';
 import LandingPage from "./landing-page";
+import CategoryPage from "./category-page";
 import { getCategories } from "./actions/categories";
 import { getPosts } from "./actions/posts";
 
@@ -15,7 +17,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route exact path="/" render={() => (<LandingPage />)} />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" render={() => <LandingPage />} />
+            <Route path="/categories/:category" render={(props) => <CategoryPage category={props.match.params.category} />} />
+          </Switch>
+        </BrowserRouter>
       </div>
     )
   }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import PostOverview from "./post-overview";
 import PostListSortOnPicker from "./post-list-sort-on-picker";
 
@@ -70,9 +69,4 @@ class PostList extends Component {
 }
 
 
-// Connect to Redux store
-const mapStateToProps = ({posts}) => ({
-  posts
-})
-
-export default connect(mapStateToProps)(PostList)
+export default PostList

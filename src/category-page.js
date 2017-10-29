@@ -4,11 +4,11 @@ import Header from "./header";
 import NewPostLink from "./new-post-link";
 import PostList from "./post-list";
 
-class LandingPage extends Component {
+class CategoryPage extends Component {
   render() {
     const { posts } = this.props;
 
-    return(
+    return (
       <div>
         <Header />
         <NewPostLink />
@@ -20,8 +20,8 @@ class LandingPage extends Component {
 
 
 // Connect to Redux store
-const mapStateToProps = ({posts}) => ({
-  posts
+const mapStateToProps = ({posts}, ownProps) => ({
+  posts: posts.filter(post => post.category === ownProps.category)
 })
 
-export default connect(mapStateToProps)(LandingPage)
+export default connect(mapStateToProps)(CategoryPage)
