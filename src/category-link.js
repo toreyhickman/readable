@@ -13,7 +13,7 @@ class CategoryLink extends Component {
     const { name, path } = this.props
 
     return (
-      <Link to={`/category/${path}`}>{name}</Link>
+      <Link to={`/categories/${path}`}>{name}</Link>
     )
   }
 }
