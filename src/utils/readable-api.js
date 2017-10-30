@@ -29,3 +29,5 @@ export const getPosts = () => get("/posts")
 export const upVotePost = (id) => post("/posts/" + id, {option: "upVote"})
 
 export const downVotePost = (id) => post("/posts/" + id, {option: "downVote"})
+
+export const createPost = (postData) => post("/posts", postData)

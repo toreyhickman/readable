@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { BrowserRouter } from 'react-router-dom';
 import LandingPage from "./landing-page";
 import CategoryPage from "./category-page";
+import NewPostPage from "./new-post-page";
 import { getCategories } from "./actions/categories";
 import { getPosts } from "./actions/posts";
 
@@ -21,6 +22,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => <LandingPage />} />
             <Route path="/categories/:category" render={(props) => <CategoryPage category={props.match.params.category} />} />
+            <Route exact path="/posts/new" render={() => <NewPostPage />} />
           </Switch>
         </BrowserRouter>
       </div>
