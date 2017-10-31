@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import uuidv4 from "uuid/v4";
 
 class PostForm extends Component {
@@ -16,6 +17,7 @@ class PostForm extends Component {
   }
 
   state = {
+    submitted: false,
     postData: {
       id: "",
       timestamp: "",
@@ -58,10 +60,11 @@ class PostForm extends Component {
     event.preventDefault()
 
     if (!this.isNewPost()) {
-      this.props.onSubmit(this.state.postData)
+      this.setState({submitted: true}, () => this.props.onSubmit(this.state.postData))
     } else {
       this.setState((previousState) => {
         return {
+          submitted: true,
           postData: {
             ...previousState.postData,
             id: uuidv4(),
@@ -76,34 +79,39 @@ class PostForm extends Component {
   isNewPost = () => !this.state.postData.id
 
   render() {
-    const { title, body, author, category } = this.state.postData
+    const { id, title, body, author, category } = this.state.postData
 
     return (
-      <form onSubmit={this.handleFormSubmit}>
-        <label htmlFor="title">Title: </label>
-        <input id="title" onChange={this.handleChange} value={title} />
+      <div>
+        {
+          this.state.submitted ? <Redirect to={`/posts/${id}`} /> :
+          <form onSubmit={this.handleFormSubmit}>
+            <label htmlFor="title">Title: </label>
+            <input id="title" onChange={this.handleChange} value={title} />
 
-        <label htmlFor="body">Body: </label>
-        <textarea id="body" onChange={this.handleChange} value={body} ></textarea>
+            <label htmlFor="body">Body: </label>
+            <textarea id="body" onChange={this.handleChange} value={body} ></textarea>
 
-        {this.isNewPost() && <div>
-          <label htmlFor="author">Author: </label>
-          <input id="author" onChange={this.handleChange} value={author} />
+            {this.isNewPost() && <div>
+              <label htmlFor="author">Author: </label>
+              <input id="author" onChange={this.handleChange} value={author} />
 
-          <label htmlFor="category">Category: </label>
-          <select id="category" onChange={this.handleChange} value={category} >
-            {this.props.categories.map(category => <option key={category.name} value={category.name} >{category.name}</option>)}
-          </select>
-        </div>}
+              <label htmlFor="category">Category: </label>
+              <select id="category" onChange={this.handleChange} value={category} >
+                {this.props.categories.map(category => <option key={category.name} value={category.name} >{category.name}</option>)}
+              </select>
+            </div>}
 
-        <button>{this.isNewPost() ? "Create" : "Edit"}</button>
-      </form>
+            <button>{this.isNewPost() ? "Create" : "Edit"}</button>
+          </form>
+        }
+      </div>
     )
   }
 }
 
 // Connect to Redux store
-const mapStateToProps = ({categories}) => ({
+const mapStateToProps = ({categories, posts}, ownProps) => ({
   categories
 })
 
