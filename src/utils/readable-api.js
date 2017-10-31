@@ -2,7 +2,10 @@ const READABLE_API_KEY  = "123456"
 const READABLE_API_HOST = "http://localhost:3001"
 
 const DEFAULT_REQUEST_OPTIONS = {
-  headers: { "Authorization": READABLE_API_KEY }
+  headers: {
+    "Authorization": READABLE_API_KEY,
+    "Content-Type": "application/json"
+  }
 }
 
 const get = (path) => (
@@ -12,12 +15,18 @@ const get = (path) => (
 
 const post = (path, body) => (
   fetch(READABLE_API_HOST + path, {
-    method: "POST",
+    ...DEFAULT_REQUEST_OPTIONS,
     body: JSON.stringify(body),
-    headers: {
-      ...DEFAULT_REQUEST_OPTIONS.headers,
-      "Content-Type": "application/json"
-    }
+    method: "POST"
+  })
+  .then(response => response.json())
+)
+
+const put = (path, body) => (
+  fetch(READABLE_API_HOST + path, {
+    ...DEFAULT_REQUEST_OPTIONS,
+    body: JSON.stringify(body),
+    method: "PUT"
   })
   .then(response => response.json())
 )
@@ -31,3 +40,5 @@ export const upVotePost = (id) => post("/posts/" + id, {option: "upVote"})
 export const downVotePost = (id) => post("/posts/" + id, {option: "downVote"})
 
 export const createPost = (postData) => post("/posts", postData)
+
+export const editPost = (postData) => put("/posts/" + postData.id, postData)

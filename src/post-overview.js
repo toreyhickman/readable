@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import PostVoter from "./post-voter";
 
 class PostOverview extends Component {
@@ -28,6 +29,7 @@ class PostOverview extends Component {
         <p>Score: {voteScore}</p>
         <p>Comment count: {commentCount}</p>
         <PostVoter id={id} />
+        <Link to={`/posts/${id}/edit`} >edit</Link>
       </div>
     )
   }

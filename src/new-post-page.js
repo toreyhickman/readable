@@ -11,7 +11,7 @@ class NewPostPage extends Component {
       <div>
         <Header />
         <h1>Write a New Post</h1>
-        <PostForm createPost={this.props.createPost} />
+        <PostForm onSubmit={this.props.createPost} />
       </div>
     )
   }

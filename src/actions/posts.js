@@ -39,3 +39,8 @@ export const createPost = (postData) => dispatch => {
   ReadableAPI.createPost(postData)
   .then((postData) => dispatch(addPost(postData)))
 }
+
+export const editPost = (postData) => dispatch => {
+  ReadableAPI.editPost(postData)
+  .then((postData) => dispatch(updatePost(postData)))
+}

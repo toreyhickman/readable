@@ -5,7 +5,14 @@ import uuidv4 from "uuid/v4";
 
 class PostForm extends Component {
   static PropTypes = {
-    createPost: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    postData: PropTypes.shape({
+      id: PropTypes.string,
+      timestamp: PropTypes.number,
+      title: PropTypes.string,
+      body: PropTypes.string,
+      author: PropTypes.string
+    })
   }
 
   state = {
@@ -16,6 +23,21 @@ class PostForm extends Component {
       body: "",
       author: "",
       category: "react"
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+
+    if(nextProps.postData) {
+      this.setState((previousState) => {
+        return {
+          postData: {
+            ...previousState.postData,
+            ...nextProps.postData
+          }
+        }
+      })
     }
   }
 
@@ -35,17 +57,23 @@ class PostForm extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault()
 
-    this.setState((previousState) => {
-      return {
-        postData: {
-          ...previousState.postData,
-          id: uuidv4(),
-          timestamp: Date.now()
+    if (!this.isNewPost()) {
+      this.props.onSubmit(this.state.postData)
+    } else {
+      this.setState((previousState) => {
+        return {
+          postData: {
+            ...previousState.postData,
+            id: uuidv4(),
+            timestamp: Date.now()
+          }
         }
       }
+      , () => this.props.onSubmit(this.state.postData))
     }
-    , () => this.props.createPost(this.state.postData))
   }
+
+  isNewPost = () => !this.state.postData.id
 
   render() {
     const { title, body, author, category } = this.state.postData
@@ -58,15 +86,17 @@ class PostForm extends Component {
         <label htmlFor="body">Body: </label>
         <textarea id="body" onChange={this.handleChange} value={body} ></textarea>
 
-        <label htmlFor="author">Author: </label>
-        <input id="author" onChange={this.handleChange} value={author} />
+        {this.isNewPost() && <div>
+          <label htmlFor="author">Author: </label>
+          <input id="author" onChange={this.handleChange} value={author} />
 
-        <label htmlFor="category">Category: </label>
-        <select id="category" onChange={this.handleChange} value={category} >
-          {this.props.categories.map(category => <option key={category.name} value={category.name} >{category.name}</option>)}
-        </select>
+          <label htmlFor="category">Category: </label>
+          <select id="category" onChange={this.handleChange} value={category} >
+            {this.props.categories.map(category => <option key={category.name} value={category.name} >{category.name}</option>)}
+          </select>
+        </div>}
 
-        <button>Create</button>
+        <button>{this.isNewPost() ? "Create" : "Edit"}</button>
       </form>
     )
   }
