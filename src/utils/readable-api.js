@@ -31,6 +31,14 @@ const put = (path, body) => (
   .then(response => response.json())
 )
 
+const deleteRequest = (path) => (
+  fetch(READABLE_API_HOST + path, {
+    ...DEFAULT_REQUEST_OPTIONS,
+    method: "DELETE"
+  })
+  .then(response => response.json())
+)
+
 export const getCategories = () => get("/categories").then(json => json.categories)
 
 export const getPosts = () => get("/posts")
@@ -42,3 +50,5 @@ export const downVotePost = (id) => post("/posts/" + id, {option: "downVote"})
 export const createPost = (postData) => post("/posts", postData)
 
 export const editPost = (postData) => put("/posts/" + postData.id, postData)
+
+export const deletePost = (id) => deleteRequest("/posts/" + id)

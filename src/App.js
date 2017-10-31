@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import LandingPage from "./landing-page";
 import CategoryPage from "./category-page";
 import NewPostPage from "./new-post-page";
+import PostPage from "./post-page";
 import EditPostPage from "./edit-post-page";
 import { getCategories } from "./actions/categories";
 import { getPosts } from "./actions/posts";
@@ -22,9 +23,10 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" render={() => <LandingPage />} />
-            <Route path="/categories/:category" render={(props) => <CategoryPage category={props.match.params.category} />} />
+            <Route exact path="/categories/:category" render={(props) => <CategoryPage category={props.match.params.category} />} />
             <Route exact path="/posts/new" render={() => <NewPostPage />} />
-            <Route path="/posts/:id/edit" render={(props) => <EditPostPage postId={props.match.params.id} />} />
+            <Route exact path="/posts/:id" render={(props) => <PostPage postId={props.match.params.id} />} />
+            <Route exact path="/posts/:id/edit" render={(props) => <EditPostPage postId={props.match.params.id} />} />
           </Switch>
         </BrowserRouter>
       </div>

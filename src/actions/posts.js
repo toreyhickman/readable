@@ -3,6 +3,7 @@ import * as ReadableAPI from "../utils/readable-api";
 export const ASSIGN_POSTS = "ASSIGN_POSTS";
 export const UPDATE_POST = "UPDATE_POST";
 export const ADD_POST = "ADD_POST";
+export const REMOVE_POST = "REMOVE_POST";
 
 const assignPosts = (posts) => ({
   type: ASSIGN_POSTS,
@@ -18,6 +19,11 @@ const updatePost = (postData) => ({
 const addPost = (postData) => ({
   type: ADD_POST,
   postData
+})
+
+const removePost = (postData) => ({
+  type: REMOVE_POST,
+  postId: postData.id
 })
 
 export const getPosts = () => dispatch => {
@@ -43,4 +49,9 @@ export const createPost = (postData) => dispatch => {
 export const editPost = (postData) => dispatch => {
   ReadableAPI.editPost(postData)
   .then((postData) => dispatch(updatePost(postData)))
+}
+
+export const deletePost = (id) => dispatch => {
+  ReadableAPI.deletePost(id)
+  .then((postData) => dispatch(removePost(postData)))
 }

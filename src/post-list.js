@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import PostOverview from "./post-overview";
 import PostListSortOnPicker from "./post-list-sort-on-picker";
 
@@ -58,6 +59,7 @@ class PostList extends Component {
           {
             this.sortedPosts().map(post => (
               <li key={post.id}>
+                <h1><Link to={`/posts/${post.id}`}>{post.title}</Link></h1>
                 <PostOverview {...post} />
               </li>
             ))
