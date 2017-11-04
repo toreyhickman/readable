@@ -58,3 +58,5 @@ export const getComments = (postId) => get("/posts/" + postId + "/comments")
 export const upVoteComment = (id) => post("/comments/" + id, {option: "upVote"})
 
 export const downVoteComment = (id) => post("/comments/" + id, {option: "downVote"})
+
+export const deleteComment = (id) => deleteRequest("/comments/" + id)

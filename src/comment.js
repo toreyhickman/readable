@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import CommentVoter from "./comment-voter";
+import { deleteComment } from "./actions/comments";
 
 class Comment extends Component {
   postDate = () => new Date(this.props.timestamp).toString()
@@ -13,9 +15,17 @@ class Comment extends Component {
         <p>Written by {author} on {this.postDate()}.</p>
         <p>Score: {voteScore}</p>
         <CommentVoter id={id} />
+
+        <button onClick={() => this.props.deleteComment(id)} >delete</button>
       </div>
     )
   }
 }
 
-export default Comment
+
+// Connect to redux store
+const mapDispatchToProps = (dispatch) => ({
+  deleteComment: (id) => dispatch(deleteComment(id))
+})
+
+export default connect(null, mapDispatchToProps)(Comment)
