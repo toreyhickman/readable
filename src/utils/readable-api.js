@@ -52,3 +52,5 @@ export const createPost = (postData) => post("/posts", postData)
 export const editPost = (postData) => put("/posts/" + postData.id, postData)
 
 export const deletePost = (id) => deleteRequest("/posts/" + id)
+
+export const getComments = (postId) => get("/posts/" + postId + "/comments")

@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { deletePost } from "./actions/posts";
+import { getComments } from "./actions/comments";
 import Header from "./header";
 import PostOverview from "./post-overview";
+import CommentList from "./comment-list";
 
 class PostPage extends Component {
+  componentDidMount() {
+    this.props.getComments(this.props.postId)
+  }
+
   postExists = () => !!this.props.post
 
   render() {
@@ -21,6 +27,10 @@ class PostPage extends Component {
             <button onClick={() => this.props.deletePost(this.props.post.id)} >delete</button>
           </div>
       }
+        <section>
+          <h1>Comments</h1>
+          <CommentList comments={this.props.comments} />
+        </section>
       </div>
     )
   }
@@ -28,12 +38,14 @@ class PostPage extends Component {
 
 
 // Connect to redux store
-const mapStateToProps = ({posts}, ownProps) => ({
-  post: posts.find(post => post.id === ownProps.postId)
+const mapStateToProps = ({posts, comments}, ownProps) => ({
+  post: posts.find(post => post.id === ownProps.postId),
+  comments: comments.filter(comment => comment.parentId === ownProps.postId)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  deletePost: (id) => dispatch(deletePost(id))
+  deletePost: (id) => dispatch(deletePost(id)),
+  getComments: (id) => dispatch(getComments(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostPage)

@@ -31,8 +31,6 @@ class PostList extends Component {
 
   setSortOn = (postAttribute) => this.setState({sortOn: postAttribute })
 
-  heading = () => "Posts"
-
   sortedPosts = () => {
     const { sortOn } = this.state
 
@@ -49,22 +47,29 @@ class PostList extends Component {
     })
   }
 
+  hasPosts = () => this.props.posts.length > 0
+
   render() {
     return (
       <div>
-        <h1>{this.heading()}</h1>
-        <span>Sort by: </span>
-        <PostListSortOnPicker options={this.sortOptions} onChange={this.setSortOn} />
-        <ul>
-          {
-            this.sortedPosts().map(post => (
-              <li key={post.id}>
-                <h1><Link to={`/posts/${post.id}`}>{post.title}</Link></h1>
-                <PostOverview {...post} />
-              </li>
-            ))
-          }
-        </ul>
+        <h1>Posts</h1>
+        {
+          !this.hasPosts() ? <p>No posts to show ...</p> :
+          <div>
+            <span>Sort by: </span>
+            <PostListSortOnPicker options={this.sortOptions} onChange={this.setSortOn} />
+            <ul>
+              {
+                this.sortedPosts().map(post => (
+                  <li key={post.id}>
+                    <h1><Link to={`/posts/${post.id}`}>{post.title}</Link></h1>
+                    <PostOverview {...post} />
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        }
       </div>
     )
   }

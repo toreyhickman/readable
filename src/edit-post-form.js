@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 class EditPostForm extends Component {
@@ -37,7 +36,7 @@ class EditPostForm extends Component {
   }
 
   render() {
-    const { id, title, body, author, category } = this.state.postData
+    const { id, title, body } = this.state.postData
 
     return (
       <div>
