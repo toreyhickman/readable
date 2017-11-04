@@ -54,3 +54,7 @@ export const editPost = (postData) => put("/posts/" + postData.id, postData)
 export const deletePost = (id) => deleteRequest("/posts/" + id)
 
 export const getComments = (postId) => get("/posts/" + postId + "/comments")
+
+export const upVoteComment = (id) => post("/comments/" + id, {option: "upVote"})
+
+export const downVoteComment = (id) => post("/comments/" + id, {option: "downVote"})
