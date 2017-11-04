@@ -4,20 +4,12 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import uuidv4 from "uuid/v4";
 
-class PostForm extends Component {
+class NewPostForm extends Component {
   static PropTypes = {
     onSubmit: PropTypes.func.isRequired,
-    postData: PropTypes.shape({
-      id: PropTypes.string,
-      timestamp: PropTypes.number,
-      title: PropTypes.string,
-      body: PropTypes.string,
-      author: PropTypes.string
-    })
   }
 
   state = {
-    submitted: false,
     postData: {
       id: "",
       timestamp: "",
@@ -28,20 +20,9 @@ class PostForm extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+  isPostCreated = () => !!this.post()
 
-    if(nextProps.postData) {
-      this.setState((previousState) => {
-        return {
-          postData: {
-            ...previousState.postData,
-            ...nextProps.postData
-          }
-        }
-      })
-    }
-  }
+  post = () => this.props.posts.find(post => post.id === this.state.postData.id)
 
   handleChange = (event) => this.updatePostData(event.target.id, event.target.value)
 
@@ -59,24 +40,18 @@ class PostForm extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault()
 
-    if (!this.isNewPost()) {
-      this.setState({submitted: true}, () => this.props.onSubmit(this.state.postData))
-    } else {
-      this.setState((previousState) => {
-        return {
-          submitted: true,
-          postData: {
-            ...previousState.postData,
-            id: uuidv4(),
-            timestamp: Date.now()
-          }
+    this.setState((previousState) => {
+      return {
+        submitted: true,
+        postData: {
+          ...previousState.postData,
+          id: uuidv4(),
+          timestamp: Date.now()
         }
       }
-      , () => this.props.onSubmit(this.state.postData))
     }
+    , () => this.props.onSubmit(this.state.postData))
   }
-
-  isNewPost = () => !this.state.postData.id
 
   render() {
     const { id, title, body, author, category } = this.state.postData
@@ -84,7 +59,7 @@ class PostForm extends Component {
     return (
       <div>
         {
-          this.state.submitted ? <Redirect to={`/posts/${id}`} /> :
+          this.isPostCreated() ? <Redirect to={`/posts/${id}`} /> :
           <form onSubmit={this.handleFormSubmit}>
             <label htmlFor="title">Title: </label>
             <input id="title" onChange={this.handleChange} value={title} />
@@ -92,7 +67,7 @@ class PostForm extends Component {
             <label htmlFor="body">Body: </label>
             <textarea id="body" onChange={this.handleChange} value={body} ></textarea>
 
-            {this.isNewPost() && <div>
+            <div>
               <label htmlFor="author">Author: </label>
               <input id="author" onChange={this.handleChange} value={author} />
 
@@ -100,9 +75,9 @@ class PostForm extends Component {
               <select id="category" onChange={this.handleChange} value={category} >
                 {this.props.categories.map(category => <option key={category.name} value={category.name} >{category.name}</option>)}
               </select>
-            </div>}
+            </div>
 
-            <button>{this.isNewPost() ? "Create" : "Edit"}</button>
+            <button>Create</button>
           </form>
         }
       </div>
@@ -111,8 +86,9 @@ class PostForm extends Component {
 }
 
 // Connect to Redux store
-const mapStateToProps = ({categories, posts}, ownProps) => ({
+const mapStateToProps = ({categories, posts}) => ({
+  posts,
   categories
 })
 
-export default connect(mapStateToProps)(PostForm)
+export default connect(mapStateToProps)(NewPostForm)

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "./header";
-import PostForm from "./post-form";
+import NewPostForm from "./new-post-form";
 import { createPost } from "./actions/posts";
 
 
@@ -11,7 +11,7 @@ class NewPostPage extends Component {
       <div>
         <Header />
         <h1>Write a New Post</h1>
-        <PostForm onSubmit={this.props.createPost} />
+        <NewPostForm onSubmit={this.props.createPost} />
       </div>
     )
   }
