@@ -20,20 +20,20 @@ class PostPage extends Component {
       <div>
       {
         !this.postExists() ? <Redirect to="/" /> :
-          <div>
-            <Header />
-            <h1>{this.props.post.title}</h1>
-            <PostOverview {...this.props.post} />
-            <Link to={`/posts/${this.props.post.id}/edit`} >edit</Link>
-            <button onClick={() => this.props.deletePost(this.props.post.id)} >delete</button>
-          </div>
+        <div>
+          <Header />
+          <h1>{this.props.post.title}</h1>
+          <PostOverview {...this.props.post} />
+          <Link to={`/posts/${this.props.post.id}/edit`} >edit</Link>
+          <button onClick={() => this.props.deletePost(this.props.post.id)} >delete</button>
+          <section>
+            <h1>Comments</h1>
+            <CommentList comments={this.props.comments} />
+            <h2>Add a Comment</h2>
+            <NewCommentForm postId={this.props.post.id}/>
+          </section>
+        </div>
       }
-        <section>
-          <h1>Comments</h1>
-          <CommentList comments={this.props.comments} />
-          <h2>Add a Comment</h2>
-          <NewCommentForm postId={this.props.post.id}/>
-        </section>
       </div>
     )
   }
