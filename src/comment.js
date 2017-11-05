@@ -4,7 +4,7 @@ import CommentVoter from "./comment-voter";
 import { deleteComment } from "./actions/comments";
 
 class Comment extends Component {
-  postDate = () => new Date(this.props.timestamp).toString()
+  commentDate = () => new Date(this.props.timestamp).toString()
 
   render() {
     const { id, body, author, voteScore } = this.props
@@ -12,7 +12,7 @@ class Comment extends Component {
     return (
       <div>
         <p>{body}</p>
-        <p>Written by {author} on {this.postDate()}.</p>
+        <p>Written by {author} on {this.commentDate()}.</p>
         <p>Score: {voteScore}</p>
         <CommentVoter id={id} />
 

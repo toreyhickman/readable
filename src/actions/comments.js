@@ -2,6 +2,7 @@ import * as ReadableAPI from "../utils/readable-api";
 
 export const ASSIGN_COMMENTS = "ASSIGN_COMMENTS";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
+export const ADD_COMMENT = "ADD_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 
 const assignComments = (comments) => ({
@@ -14,6 +15,12 @@ const updateComment = (commentData) => ({
   commentId: commentData.id,
   commentData
 })
+
+const addComment = (commentData) => ({
+  type: ADD_COMMENT,
+  commentData
+})
+
 
 const removeComment = (commentData) => ({
   type: REMOVE_COMMENT,
@@ -35,6 +42,11 @@ export const upVoteComment = (id) => dispatch => {
 export const downVoteComment = (id) => dispatch => {
   ReadableAPI.downVoteComment(id)
   .then((commentData) => dispatch(updateComment(commentData)))
+}
+
+export const createComment = (commentData) => dispatch => {
+  ReadableAPI.createComment(commentData)
+  .then((commentData) => dispatch(addComment(commentData)))
 }
 
 export const deleteComment = (id) => dispatch => {

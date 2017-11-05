@@ -6,6 +6,7 @@ import { getComments } from "./actions/comments";
 import Header from "./header";
 import PostOverview from "./post-overview";
 import CommentList from "./comment-list";
+import NewCommentForm from "./new-comment-form";
 
 class PostPage extends Component {
   componentDidMount() {
@@ -30,6 +31,8 @@ class PostPage extends Component {
         <section>
           <h1>Comments</h1>
           <CommentList comments={this.props.comments} />
+          <h2>Add a Comment</h2>
+          <NewCommentForm postId={this.props.post.id}/>
         </section>
       </div>
     )
