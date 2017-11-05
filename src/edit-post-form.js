@@ -9,7 +9,6 @@ class EditPostForm extends Component {
   }
 
   constructor(props) {
-    console.log(props)
     super(props)
     this.state = {
       submitted: false,
@@ -31,7 +30,6 @@ class EditPostForm extends Component {
   }
 
   handleFormSubmit = (event) => {
-    event.preventDefault()
     this.setState({ submitted: true}, () => this.props.onSubmit(this.state.postData))
   }
 
