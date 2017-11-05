@@ -49,6 +49,12 @@ export const createComment = (commentData) => dispatch => {
   .then((commentData) => dispatch(addComment(commentData)))
 }
 
+export const editComment = (commentData) => dispatch => {
+  console.log("Edit comment action creator: " + commentData)
+  ReadableAPI.editComment(commentData)
+  .then((commentData) => dispatch(updateComment(commentData)))
+}
+
 export const deleteComment = (id) => dispatch => {
   ReadableAPI.deleteComment(id)
   .then((commentData) => dispatch(removeComment(commentData)))
