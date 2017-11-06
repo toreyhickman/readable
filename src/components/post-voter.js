@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { upVoteComment, downVoteComment } from "./actions/comments";
+import { upVotePost, downVotePost } from "../actions/posts";
 
-class CommentVoter extends Component {
+class PostVoter extends Component {
   static PropTypes = {
     id: PropTypes.string.isRequired,
     upVotePost: PropTypes.func.isRequired,
     downVotePost: PropTypes.func.isRequired
   }
 
-  handleUpVote = () => this.props.upVoteComment(this.props.id);
+  handleUpVote = () => this.props.upVotePost(this.props.id);
 
-  handleDownVote = () => this.props.downVoteComment(this.props.id);
+  handleDownVote = () => this.props.downVotePost(this.props.id);
 
   render() {
     return (
@@ -27,11 +27,11 @@ class CommentVoter extends Component {
 
 // Connect to Redux store
 const mapDispatchToProps = (dispatch) => ({
-  upVoteComment: (id) => dispatch(upVoteComment(id)),
-  downVoteComment: (id) => dispatch(downVoteComment(id))
+  upVotePost: (id) => dispatch(upVotePost(id)),
+  downVotePost: (id) => dispatch(downVotePost(id))
 })
 
 export default connect(
   null,
   mapDispatchToProps
-)(CommentVoter)
+)(PostVoter)

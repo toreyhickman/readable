@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createComment } from "./actions/comments";
+import { createComment } from "../actions/comments";
 import uuidv4 from "uuid/v4";
 
 class NewCommentForm extends Component {

@@ -7,8 +7,8 @@ import CategoryPage from "./category-page";
 import NewPostPage from "./new-post-page";
 import PostPage from "./post-page";
 import EditPostPage from "./edit-post-page";
-import { getCategories } from "./actions/categories";
-import { getPosts } from "./actions/posts";
+import { getCategories } from "../actions/categories";
+import { getPosts } from "../actions/posts";
 
 
 class App extends Component {

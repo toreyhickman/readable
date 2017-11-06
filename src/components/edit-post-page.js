@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { editPost } from "./actions/posts";
+import { editPost } from "../actions/posts";
 import Header from "./header";
 import EditPostForm from "./edit-post-form";
 

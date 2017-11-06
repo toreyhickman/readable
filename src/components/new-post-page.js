@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "./header";
 import NewPostForm from "./new-post-form";
-import { createPost } from "./actions/posts";
+import { createPost } from "../actions/posts";
 
 
 class NewPostPage extends Component {

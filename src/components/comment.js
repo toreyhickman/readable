@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import CommentVoter from "./comment-voter";
 import EditCommentForm from "./edit-comment-form";
-import { deleteComment, editComment } from "./actions/comments";
+import { deleteComment, editComment } from "../actions/comments";
 
 class Comment extends Component {
   state = {

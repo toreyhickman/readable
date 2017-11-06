@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { deletePost } from "./actions/posts";
-import { getComments } from "./actions/comments";
+import { deletePost } from "../actions/posts";
+import { getComments } from "../actions/comments";
 import Header from "./header";
 import PostOverview from "./post-overview";
 import CommentList from "./comment-list";
