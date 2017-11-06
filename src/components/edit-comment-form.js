@@ -38,11 +38,11 @@ class EditCommentForm extends Component {
     const {body} = this.state.commentData
 
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form onSubmit={this.handleFormSubmit} className="form">
         <label htmlFor="body">Body: </label>
         <textarea id="body" onChange={this.handleChange} value={body}></textarea>
 
-        <button>Edit</button>
+        <button className="button">Edit</button>
       </form>
     )
   }

@@ -18,16 +18,16 @@ class Comment extends Component {
     const { editing } = this.state
 
     return (
-      <div>
+      <div class="comment">
         {
           editing ? <EditCommentForm editComment={editComment} commentData={{id, body}} /> :
           <div>
             <p>{body}</p>
-            <p>Written by {author} on {this.commentDate()}.</p>
-            <p>Score: {voteScore}</p>
+            <p className="detail">Written by {author} on {this.commentDate()}.</p>
+            <p className="detail">Score: {voteScore}</p>
             <CommentVoter id={id} />
-            <span onClick={this.markEditing}>edit</span>
-            <button onClick={() => this.props.deleteComment(id)} >delete</button>
+            <span onClick={this.markEditing} className="button small-button">edit</span>
+            <button onClick={() => this.props.deleteComment(id)} className="button small-button">delete</button>
           </div>
         }
       </div>

@@ -60,24 +60,22 @@ class NewPostForm extends Component {
       <div>
         {
           this.isPostCreated() ? <Redirect to={`/posts/${id}`} /> :
-          <form onSubmit={this.handleFormSubmit}>
+          <form onSubmit={this.handleFormSubmit} className="form">
             <label htmlFor="title">Title: </label>
             <input id="title" onChange={this.handleChange} value={title} />
 
             <label htmlFor="body">Body: </label>
             <textarea id="body" onChange={this.handleChange} value={body} ></textarea>
 
-            <div>
-              <label htmlFor="author">Author: </label>
-              <input id="author" onChange={this.handleChange} value={author} />
+            <label htmlFor="author">Author: </label>
+            <input id="author" onChange={this.handleChange} value={author} />
 
-              <label htmlFor="category">Category: </label>
-              <select id="category" onChange={this.handleChange} value={category} >
-                {this.props.categories.map(category => <option key={category.name} value={category.name} >{category.name}</option>)}
-              </select>
-            </div>
+            <label htmlFor="category">Category: </label>
+            <select id="category" onChange={this.handleChange} value={category} >
+              {this.props.categories.map(category => <option key={category.name} value={category.name} >{category.name}</option>)}
+            </select>
 
-            <button>Create</button>
+            <button className="button">Create</button>
           </form>
         }
       </div>

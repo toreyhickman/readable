@@ -59,14 +59,14 @@ class NewCommentForm extends Component {
     const { body, author } = this.state.commentData
 
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form onSubmit={this.handleFormSubmit} className="form">
         <label htmlFor="body">Body: </label>
         <textarea id="body" onChange={this.handleChange} value={body} ></textarea>
 
         <label htmlFor="author">Author: </label>
         <input id="author" onChange={this.handleChange} value={author} />
 
-        <button>Add Comment</button>
+        <button className="button">Add Comment</button>
       </form>
     )
   }

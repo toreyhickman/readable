@@ -17,8 +17,8 @@ class PostVoter extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleUpVote}>Up Vote</button>
-        <button onClick={this.handleDownVote}>Down Vote</button>
+        <button onClick={this.handleUpVote} className="button small-button">up vote</button>
+        <button onClick={this.handleDownVote} className="button small-button">down vote</button>
       </div>
     )
   }

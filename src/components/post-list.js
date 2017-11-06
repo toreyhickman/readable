@@ -61,7 +61,7 @@ class PostList extends Component {
             <ul>
               {
                 this.sortedPosts().map(post => (
-                  <li key={post.id}>
+                  <li key={post.id} className="post-list-item">
                     <h1><Link to={`/posts/${post.id}`}>{post.title}</Link></h1>
                     <PostOverview {...post} />
                   </li>

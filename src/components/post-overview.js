@@ -21,11 +21,11 @@ class PostOverview extends Component {
     const { id, body, author, voteScore, commentCount } = this.props
 
     return (
-      <div>
+      <div class="post-overview">
         <p>{body}</p>
-        <p>Written by {author} on {this.postDate()}.</p>
-        <p>Score: {voteScore}</p>
-        <p>Comment count: {commentCount}</p>
+        <p className="detail">Written by {author} on {this.postDate()}.</p>
+        <p className="detail">Score: {voteScore}</p>
+        <p className="detail">Comment count: {commentCount}</p>
         <PostVoter id={id} />
       </div>
     )

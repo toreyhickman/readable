@@ -22,10 +22,12 @@ class PostPage extends Component {
         !this.postExists() ? <Redirect to="/" /> :
         <div>
           <Header />
-          <h1>{this.props.post.title}</h1>
-          <PostOverview {...this.props.post} />
-          <Link to={`/posts/${this.props.post.id}/edit`} >edit</Link>
-          <button onClick={() => this.props.deletePost(this.props.post.id)} >delete</button>
+          <section className="post">
+            <h1>{this.props.post.title}</h1>
+            <PostOverview {...this.props.post} />
+            <Link to={`/posts/${this.props.post.id}/edit`} className="button small-button">edit</Link>
+            <button onClick={() => this.props.deletePost(this.props.post.id)}  className="button small-button">delete</button>
+          </section>
           <section>
             <h1>Comments</h1>
             <CommentList comments={this.props.comments} />

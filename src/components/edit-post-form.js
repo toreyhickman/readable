@@ -40,14 +40,14 @@ class EditPostForm extends Component {
       <div>
         {
           this.state.submitted ? <Redirect to={`/posts/${id}`} /> :
-          <form onSubmit={this.handleFormSubmit}>
+          <form onSubmit={this.handleFormSubmit} className="form">
             <label htmlFor="title">Title: </label>
             <input id="title" onChange={this.handleChange} value={title} />
 
             <label htmlFor="body">Body: </label>
             <textarea id="body" onChange={this.handleChange} value={body} ></textarea>
 
-            <button>Edit</button>
+            <button className="button">Edit</button>
           </form>
         }
       </div>

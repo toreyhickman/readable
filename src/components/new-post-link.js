@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class NewPostLink extends Component {
   render() {
     return (
-      <Link to="/posts/new">Write a Post</Link>
+      <Link to="/posts/new" className="button">Write a Post</Link>
     )
   }
 }
