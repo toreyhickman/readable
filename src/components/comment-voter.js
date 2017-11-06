@@ -16,7 +16,7 @@ class CommentVoter extends Component {
 
   render() {
     return (
-      <div class="comment-voter">
+      <div className="comment-voter">
         <button onClick={this.handleUpVote} className="button small-button" >up vote</button>
         <button onClick={this.handleDownVote} className="button small-button" >down vote</button>
       </div>

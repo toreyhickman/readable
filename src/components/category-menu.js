@@ -16,7 +16,7 @@ class CategoryMenu extends Component {
     const { categories } = this.props
 
     return(
-      <ul class="category-list">
+      <ul className="category-list">
         {categories.map(category => (
           <li key={category.name}>
             <CategoryLink {...category} />

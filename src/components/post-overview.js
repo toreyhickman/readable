@@ -21,7 +21,7 @@ class PostOverview extends Component {
     const { id, body, author, voteScore, commentCount } = this.props
 
     return (
-      <div class="post-overview">
+      <div className="post-overview">
         <p>{body}</p>
         <p className="detail">Written by {author} on {this.postDate()}.</p>
         <p className="detail">Score: {voteScore}</p>

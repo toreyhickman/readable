@@ -24,8 +24,8 @@ class CommentList extends Component {
     return (
       <ul>
         {
-          this.sortedComments().map(comment => (
-            <li><Comment {...comment}/></li>
+          this.sortedComments().map((comment, i) => (
+            <li key={i}><Comment {...comment}/></li>
           ))
         }
       </ul>

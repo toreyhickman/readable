@@ -18,7 +18,7 @@ class Comment extends Component {
     const { editing } = this.state
 
     return (
-      <div class="comment">
+      <div className="comment">
         {
           editing ? <EditCommentForm editComment={editComment} commentData={{id, body}} /> :
           <div>

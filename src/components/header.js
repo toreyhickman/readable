@@ -7,7 +7,7 @@ import NewPostLink from "./new-post-link";
 class Header extends Component {
   render() {
     return (
-      <header class="header">
+      <header className="header">
         <Link to="/">home</Link>
         <CategoryMenu />
         <NewPostLink />
