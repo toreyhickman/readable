@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import { deletePost } from "../actions/posts";
+import { Redirect } from "react-router-dom";
 import { getComments } from "../actions/comments";
 import Header from "./header";
-import PostOverview from "./post-overview";
+import Post from "./post";
 import CommentList from "./comment-list";
 import NewCommentForm from "./new-comment-form";
 
@@ -24,9 +23,7 @@ class PostPage extends Component {
           <Header />
           <section className="post">
             <h1>{this.props.post.title}</h1>
-            <PostOverview {...this.props.post} />
-            <Link to={`/posts/${this.props.post.id}/edit`} className="button small-button">edit</Link>
-            <button onClick={() => this.props.deletePost(this.props.post.id)}  className="button small-button">delete</button>
+            <Post {...this.props.post} />
           </section>
           <section>
             <h1>Comments</h1>
@@ -49,7 +46,6 @@ const mapStateToProps = ({posts, comments}, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  deletePost: (id) => dispatch(deletePost(id)),
   getComments: (id) => dispatch(getComments(id))
 })
 

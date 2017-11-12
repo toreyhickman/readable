@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import PostVoter from "./post-voter";
+import { deletePost } from "../actions/posts";
 
-class PostOverview extends Component {
+class Post extends Component {
   static PropTypes = {
     id: PropTypes.string.isRequired,
     timestamp: PropTypes.number.isRequired,
@@ -21,15 +24,23 @@ class PostOverview extends Component {
     const { id, body, author, voteScore, commentCount } = this.props
 
     return (
-      <div className="post-overview">
+      <div className="post">
         <p>{body}</p>
         <p className="detail">Written by {author} on {this.postDate()}.</p>
         <p className="detail">Score: {voteScore}</p>
         <p className="detail">Comment count: {commentCount}</p>
         <PostVoter id={id} />
+        <Link to={`/posts/${id}/edit`} className="button small-button">edit</Link>
+        <button onClick={() => this.props.deletePost(id)}  className="button small-button">delete</button>
       </div>
     )
   }
 }
 
-export default PostOverview
+
+// Connect to redux store
+const mapDispatchToProps = (dispatch) => ({
+  deletePost: (id) => dispatch(deletePost(id))
+})
+
+export default connect(null, mapDispatchToProps)(Post)
