@@ -18,7 +18,7 @@ class PostPage extends Component {
     return (
       <div>
       {
-        !this.postExists() ? <Redirect to="/" /> :
+        !this.postExists() ? <Redirect to="/404" /> :
         <div>
           <Header />
           <section className="post">

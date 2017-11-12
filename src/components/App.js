@@ -7,6 +7,7 @@ import CategoryPage from "./category-page";
 import NewPostPage from "./new-post-page";
 import PostPage from "./post-page";
 import EditPostPage from "./edit-post-page";
+import NotFound from "./not-found";
 import { getCategories } from "../actions/categories";
 import { getPosts } from "../actions/posts";
 
@@ -27,6 +28,7 @@ class App extends Component {
             <Route exact path="/posts/new" render={() => <NewPostPage />} />
             <Route exact path="/posts/:id" render={(props) => <PostPage postId={props.match.params.id} />} />
             <Route exact path="/posts/:id/edit" render={(props) => <EditPostPage postId={props.match.params.id} />} />
+            <Route exact component={NotFound} />
           </Switch>
         </BrowserRouter>
       </div>
