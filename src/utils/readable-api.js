@@ -43,6 +43,8 @@ export const getCategories = () => get("/categories").then(json => json.categori
 
 export const getPosts = () => get("/posts")
 
+export const getPost = (id) => get("/posts/" + id)
+
 export const upVotePost = (id) => post("/posts/" + id, {option: "upVote"})
 
 export const downVotePost = (id) => post("/posts/" + id, {option: "downVote"})
