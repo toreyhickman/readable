@@ -16,6 +16,10 @@ class PostPage extends Component {
 
   badPostId = () => this.postsLoaded() && !this.props.post
 
+  onPostDelete = () => {
+    this.props.history.push("/")
+  }
+
   render() {
     if (!this.postsLoaded()) {
       return null
@@ -28,7 +32,7 @@ class PostPage extends Component {
             <Header />
             <section className="post">
               <h1>{this.props.post.title}</h1>
-              <Post {...this.props.post} />
+              <Post {...this.props.post} onPostDelete={this.onPostDelete} />
             </section>
             <section>
               <h1>Comments</h1>

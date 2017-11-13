@@ -15,10 +15,16 @@ class Post extends Component {
     category: PropTypes.string.isRequired,
     voteScore: PropTypes.number.isRequired,
     deleted: PropTypes.bool.isRequired,
-    commentCount: PropTypes.number.isRequired
+    commentCount: PropTypes.number.isRequired,
+    onPostDelete: PropTypes.func
   }
 
   postDate = () => new Date(this.props.timestamp).toString()
+
+  deletePost = () => {
+    this.props.deletePost(this.props.id);
+    this.props.onPostDelete && this.props.onPostDelete();
+  }
 
   render() {
     const { id, body, author, voteScore, commentCount } = this.props
@@ -31,7 +37,7 @@ class Post extends Component {
         <p className="detail">Comment count: {commentCount}</p>
         <PostVoter id={id} />
         <Link to={`/posts/${id}/edit`} className="button small-button">edit</Link>
-        <button onClick={() => this.props.deletePost(id)}  className="button small-button">delete</button>
+        <button onClick={this.deletePost}  className="button small-button">delete</button>
       </div>
     )
   }

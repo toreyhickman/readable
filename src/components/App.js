@@ -26,7 +26,7 @@ class App extends Component {
             <Route exact path="/" render={() => <LandingPage />} />
             <Route exact path="/categories/:category" render={(props) => <CategoryPage category={props.match.params.category} />} />
             <Route exact path="/posts/new" render={() => <NewPostPage />} />
-            <Route exact path="/posts/:id" render={(props) => <PostPage postId={props.match.params.id} />} />
+            <Route exact path="/posts/:id" render={(props) => <PostPage {...props} postId={props.match.params.id} />} />
             <Route exact path="/posts/:id/edit" render={(props) => <EditPostPage postId={props.match.params.id} />} />
             <Route exact component={NotFound} />
           </Switch>
