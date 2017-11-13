@@ -55,3 +55,8 @@ export const deletePost = (id) => dispatch => {
   ReadableAPI.deletePost(id)
   .then((postData) => dispatch(removePost(postData)))
 }
+
+export const refreshPost = (id) => dispatch => {
+  ReadableAPI.getPost(id)
+  .then((postData) => dispatch(updatePost(postData)))
+}

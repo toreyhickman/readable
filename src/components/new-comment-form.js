@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createComment } from "../actions/comments";
+import { refreshPost } from "../actions/posts";
 import uuidv4 from "uuid/v4";
 
 class NewCommentForm extends Component {
@@ -43,8 +44,9 @@ class NewCommentForm extends Component {
       }
     }
     , () => {
-      this.props.createComment(this.state.commentData)
-      this.reset()
+      this.props.createComment(this.state.commentData);
+      this.props.refreshPost(this.props.postId);
+      this.reset();
     })
   }
 
@@ -76,6 +78,7 @@ class NewCommentForm extends Component {
 // Connect to redux store
 const mapDispatchToProps = (dispatch) => ({
   createComment: (commentData) => dispatch(createComment(commentData)),
+  refreshPost: (postId) => dispatch(refreshPost(postId))
 })
 
 export default connect(null, mapDispatchToProps)(NewCommentForm)

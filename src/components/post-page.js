@@ -9,25 +9,16 @@ import CommentList from "./comment-list";
 import NewCommentForm from "./new-comment-form";
 
 class PostPage extends Component {
-  state = {}
-
   componentDidMount() {
-    getPost(this.props.postId)
-    .then((post) => {
-      this.setState({post}, () => {
-        if (!this.badPostId()) {
-          this.props.getComments(this.props.postId);
-        }
-      })
-    })
+    this.props.getComments(this.props.postId)
   }
 
-  postLoaded = () => this.state.post
+  postsLoaded = () => this.props.posts.length > 0
 
-  badPostId = () => this.state.post && this.state.post.error
+  badPostId = () => this.postsLoaded() && !this.props.post
 
   render() {
-    if (!this.postLoaded()) {
+    if (!this.postsLoaded()) {
       return null
     }
 
@@ -37,8 +28,8 @@ class PostPage extends Component {
           <div>
             <Header />
             <section className="post">
-              <h1>{this.state.post.title}</h1>
-              <Post {...this.state.post} />
+              <h1>{this.props.post.title}</h1>
+              <Post {...this.props.post} />
             </section>
             <section>
               <h1>Comments</h1>
@@ -56,6 +47,8 @@ class PostPage extends Component {
 
 // Connect to redux store
 const mapStateToProps = ({posts, comments}, ownProps) => ({
+  posts,
+  post: posts.find(post => post.id === ownProps.postId),
   comments: comments.filter(comment => comment.parentId === ownProps.postId)
 })
 
