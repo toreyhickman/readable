@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getPost } from "../utils/readable-api";
 import { getComments } from "../actions/comments";
 import Header from "./header";
 import Post from "./post";
